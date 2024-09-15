@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask on Local Network Instructions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">How to Run Flask on Local Network</h1>
+        <p class="lead text-center">Follow these steps to run a Flask app on your local network and allow other devices to access it via the IP address and port:</p>
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h2>1. Modify the Flask App Code</h2>
+            </div>
+            <div class="card-body">
+                <p>In your Flask app, update the <code>app.run()</code> method to specify the host as <code>0.0.0.0</code>. This allows Flask to listen for requests from any IP address.</p>
+
+                <pre class="bg-light p-3"><code>if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)  # You can change the port if needed
+</code></pre>
+                <ul>
+                    <li><code>host='0.0.0.0'</code> allows Flask to be accessed by any device on the network.</li>
+                    <li><code>port=5000</code> specifies the port (default is 5000).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h2>2. Find Your Local IP Address</h2>
+            </div>
+            <div class="card-body">
+                <p>You'll need the local IP address of the computer running the Flask app to access it from other devices.</p>
+                <ul>
+                    <li><strong>Windows:</strong>
+                        <ol>
+                            <li>Open Command Prompt.</li>
+                            <li>Type <code>ipconfig</code> and press Enter.</li>
+                            <li>Look for the "IPv4 Address" under your network connection.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Mac/Linux:</strong>
+                        <ol>
+                            <li>Open Terminal.</li>
+                            <li>Type <code>ifconfig</code> (or <code>ip addr</code> on some systems) and press Enter.</li>
+                            <li>Find the "inet" value under your active network interface (like <code>eth0</code> or <code>wlan0</code>).</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>The local IP address will look something like <code>192.168.x.x</code>.</p>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h2>3. Run the Flask App</h2>
+            </div>
+            <div class="card-body">
+                <p>In your terminal or command prompt, navigate to the directory of your Flask app and run the following command:</p>
+                <pre class="bg-light p-3"><code>python your_flask_app.py</code></pre>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h2>4. Access the Flask App from Other Devices</h2>
+            </div>
+            <div class="card-body">
+                <p>On any device connected to the same network, open a web browser and go to:</p>
+                <pre class="bg-light p-3"><code>http://&lt;YOUR_LOCAL_IP&gt;:5000</code></pre>
+                <p>For example, if your local IP is <code>192.168.1.100</code>, type the following in the browser:</p>
+                <pre class="bg-light p-3"><code>http://192.168.1.100:5000</code></pre>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header">
+                <h2>5. Firewall Considerations (Optional)</h2>
+            </div>
+            <div class="card-body">
+                <p>If you can't access the Flask app from another device, check your firewall settings. You may need to allow traffic on port <code>5000</code>:</p>
+                <ul>
+                    <li><strong>Windows:</strong>
+                        <ol>
+                            <li>Open the "Windows Defender Firewall" settings.</li>
+                            <li>Click on "Advanced settings."</li>
+                            <li>Add a new inbound rule to allow connections on port <code>5000</code>.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Linux:</strong>
+                        <p>If you're using <code>ufw</code>, run the following command:</p>
+                        <pre class="bg-light p-3"><code>sudo ufw allow 5000/tcp</code></pre>
+                    </li>
+                    <li><strong>MacOS:</strong>
+                        <p>Go to "System Preferences" &gt; "Security & Privacy" &gt; "Firewall" and ensure that traffic on port <code>5000</code> is allowed.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="text-center mt-5">Once this is done, your Flask app should be accessible from any device on the local network!</p>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
